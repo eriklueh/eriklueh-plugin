@@ -1,7 +1,7 @@
 {
   "name": "eriklueh-plugin",
   "description": "Skills refinadas para una app Next.js 16 + Clerk + Zustand + Drizzle/SQLite + shadcn/ui + Tailwind.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Erik",
     "email": "eriklueh@nuvadi.com"

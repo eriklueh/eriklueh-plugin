@@ -1,40 +1,22 @@
 ---
 name: zustand-patterns
-description: Patrones de estado con Zustand en esta app Next.js 16. Usar al crear o modificar un store, compartir estado de cliente entre componentes, o decidir entre estado de servidor y de cliente.
+description: Patrones de estado con Zustand (v5) en esta app Next.js 16 App Router. Usar al crear o modificar un store, elegir entre estado de servidor y de cliente, o resolver problemas de hidratacion o de re-render.
 ---
 
-# Zustand — patrones del proyecto
+# Zustand (v5) — patrones del proyecto
 
-## Cuando usar Zustand (y cuando NO)
-- Usalo para estado de UI de cliente: modales, filtros, pasos de un wizard, preferencias, carrito.
-- NO lo uses para datos del servidor: eso vive en la base de datos (Drizzle) y se pasa por props desde Server Components o se recarga. Zustand no es una cache de datos remotos (para eso, revalidacion de Next o una libreria de fetching).
+Skill indice; el detalle vive en `references/`.
 
-## Estructura
-- Un store por dominio en `stores/<dominio>.ts`. Evitar un unico mega-store global.
-- Hook nombrado `useXStore`, con las acciones dentro del store:
-  ```ts
-  import { create } from 'zustand'
+## Reglas de oro
+- Zustand SOLO para estado de UI de cliente (modales, filtros, wizard, carrito, preferencias). Los datos del servidor viven en la DB (Drizzle) y llegan por props desde Server Components o server actions. Zustand **no** es cache de datos remotos.
+- `'use client'` obligatorio en todo componente que consuma el store.
+- Selectores atomicos. **Nunca** devolver un objeto/array nuevo en un selector (causa re-render infinito en v5). Para varios valores: `useShallow` de `zustand/react/shallow`.
+- Exportar el hook, nunca la instancia del store. Las mutaciones van en acciones dentro del store.
+- Tras cualquier `await` dentro de una accion, releer con `get()` (no confiar en valores capturados por closure).
+- App Router: para estado inicializado por request, usar store-per-request + Context Provider (evita fuga de estado entre usuarios en SSR). Ver `references/app-router.md`.
 
-  interface CartState {
-    items: Item[]
-    add: (i: Item) => void
-    clear: () => void
-  }
-
-  export const useCartStore = create<CartState>((set) => ({
-    items: [],
-    add: (i) => set((s) => ({ items: [...s.items, i] })),
-    clear: () => set({ items: [] }),
-  }))
-  ```
-
-## Reglas
-- Selectores atomicos para evitar re-renders: `const items = useCartStore((s) => s.items)`. No desestructurar el store entero.
-- Las mutaciones van en acciones del store, no con setState suelto en los componentes.
-- `'use client'` obligatorio en cualquier componente que consuma el store.
-- Persistencia solo si hace falta: middleware `persist` con `name` explicito. Cuidado con la hidratacion en Next (usar un guard de `hasHydrated` o `skipHydration`).
-- Nunca poner logica de servidor ni secretos en un store (todo el store viaja al cliente).
-
-## SSR / Next 16
-- Para estado global de UI, el singleton a nivel de modulo esta bien.
-- Si necesitas estado inicializado por request (con datos del servidor), no crees el store a nivel de modulo: usa un provider con `createStore` + Context para tener una instancia por request y evitar filtrar estado entre usuarios.
+## Cuando cargar cada reference
+| Necesitas... | Lee |
+|---|---|
+| Store con datos por request, SSR/RSC, Provider, hidratacion de `persist` | `references/app-router.md` |
+| Slices, selectores, middleware, acciones async, testing, gotchas | `references/patterns-and-gotchas.md` |

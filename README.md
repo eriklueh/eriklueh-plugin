@@ -8,9 +8,13 @@ Filosofia: aqui solo van skills refinadas por nosotros. Los recursos **oficiales
 revision antes de decidir si se adoptan o se les copian ideas.
 
 ## Que incluye el plugin `eriklueh-plugin`
-- `drizzle-sqlite` — convenciones de Drizzle ORM sobre SQLite (esquema, migraciones, server-only).
-- `zustand-patterns` — patrones de stores Zustand (cuando si/no, selectores, SSR).
-- `project-conventions` — estructura del proyecto, fronteras servidor/cliente, entorno.
+Cada skill es un `SKILL.md` indice + carpeta `references/` (progressive disclosure: el detalle se carga solo cuando hace falta).
+
+- `drizzle-sqlite` — Drizzle ORM sobre SQLite/better-sqlite3: conexion+PRAGMAs, queries/transacciones/migraciones, checklist de revision.
+- `zustand-patterns` — Zustand v5: store-per-request en App Router, slices/selectores/middleware, gotchas async.
+- `nextjs16-patterns` — Next.js 16: breaking changes 15->16, caching (cacheComponents/revalidateTag/updateTag), errores comunes.
+- `shadcn-tailwind-theming` — shadcn/ui + Tailwind v4 en Next (PostCSS, no Vite): setup, theming OKLCH/dark mode, gotchas.
+- `project-conventions` — indice del stack + fronteras server/cliente + integracion Clerk (Core 3: proxy.ts, ClerkProvider en body, auth() async).
 - `.mcp.json` (opcional) — conecta el **MCP de shadcn** (instalar componentes del registry) y el
   **MCP de Clerk** (snippets del SDK al dia). Borralo si prefieres configurar los MCP a nivel de proyecto.
 
@@ -35,5 +39,5 @@ Ajusta `eriklueh/eriklueh-plugin` a tu usuario/repo real de GitHub. El sufijo
   `.mcp.json` da problemas, usar `clerk mcp install` (auto-configura el cliente).
 
 ## Estado
-- Skills propias: v0.1 (borradores refinados; ajustar a las convenciones reales del proyecto).
-- Comunitarios: en revision (ver el informe que acompana este kit).
+- Skills propias: v0.2 — contenido verificado contra docs oficiales (Next 16, Tailwind/shadcn v4, Drizzle, Clerk Core 3) el 2026-08-29. Ajustar a las convenciones reales del proyecto segun evolucione.
+- Comunitarios: revisados; ninguno se instala tal cual (todos "adapt"), sus mejores ideas ya estan integradas y corregidas en estas skills.
