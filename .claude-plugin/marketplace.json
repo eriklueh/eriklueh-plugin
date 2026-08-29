@@ -1,0 +1,17 @@
+{
+  "name": "eriklueh-kit",
+  "owner": {
+    "name": "Erik",
+    "email": "eriklueh@nuvadi.com"
+  },
+  "metadata": {
+    "description": "Skills propias y refinadas para el stack Next.js 16 + Clerk + Zustand + Drizzle/SQLite + shadcn/ui + Tailwind."
+  },
+  "plugins": [
+    {
+      "name": "eriklueh-plugin",
+      "source": "./plugins/eriklueh-plugin",
+      "description": "Convenciones del proyecto: Drizzle+SQLite, stores Zustand y guia de stack. Opcional: MCP de shadcn y Clerk."
+    }
+  ]
+}
