@@ -20,4 +20,5 @@ Skill indice; el detalle vive en `references/`. Delega: auth -> `clerk`/`project
 |---|---|
 | Migrar de Next 14/15, tabla de breaking changes, firma async de Page | `references/breaking-changes.md` |
 | `use cache`, `revalidateTag`, `updateTag`, invalidacion desde server actions/webhooks | `references/caching.md` |
+| Convertir la app en PWA (manifest, service worker, web push, offline) | `references/pwa.md` |
 | Diagnosticar errores comunes de build/runtime | `references/errors.md` |
